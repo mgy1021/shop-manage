@@ -1,0 +1,52 @@
+<!--
+ * @Description: 
+ * @Author: Mogy
+ * @Date: 2021-12-14 10:36:55
+ * @LastEditors: Mogy
+ * @LastEditTime: 2021-12-14 11:23:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="img_box"></div>
+    <script>
+        function load() {
+            //创建一个存放图片的盒子
+            let box = document.getElementById("img_box")
+            //调用api获取图片
+            let apia = ["api1_img1", "api1_img2", "api1_img3", "api1_img4", "api1_img5"]
+            let apib = ["api2_img1", "api2_img2", "api2_img3", "api2_img4", "api2_img5"]
+            // let apia = api_a()
+            // let apib = api_b()
+            let imgArr = []
+            for (let i = 1; i <= 20; i++) {
+                if (i % 2 !== 0) {
+                    let img = document.createElement("img")
+                    img.style.width = "100px"
+                    img.style.height = "100px"
+                    img.setAttribute("src", apia.shift())
+                    box.appendChild(img)
+                } else {
+                    let img = document.createElement("img")
+                    img.style.width = "100px"
+                    img.style.height = "100px"
+                    img.setAttribute("src", apib.shift())
+                    box.appendChild(img)
+                }
+            }
+        }
+
+        load()
+    </script>
+</body>
+
+</html>

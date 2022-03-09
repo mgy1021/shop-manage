@@ -1,5 +1,12 @@
+<!--
+ * @Description: 
+ * @Author: Mogy
+ * @Date: 2021-12-02 15:31:51
+ * @LastEditors: Mogy
+ * @LastEditTime: 2022-02-23 21:03:25
+-->
 <template>
-  <div :class="{'has-logo':showLogo}">
+  <div :class="{ 'has-logo': showLogo }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -12,7 +19,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -28,12 +40,13 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
+      'permission_routes',
       'sidebar'
     ]),
-    routes() {
+    routes () {
       return this.$router.options.routes
     },
-    activeMenu() {
+    activeMenu () {
       const route = this.$route
       const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
@@ -42,15 +55,18 @@ export default {
       }
       return path
     },
-    showLogo() {
+    showLogo () {
       return this.$store.state.settings.sidebarLogo
     },
-    variables() {
+    variables () {
       return variables
     },
-    isCollapse() {
+    isCollapse () {
       return !this.sidebar.opened
     }
+  },
+  created () {
+
   }
 }
 </script>

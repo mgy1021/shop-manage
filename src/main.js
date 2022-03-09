@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Mogy
+ * @Date: 2021-12-02 15:31:51
+ * @LastEditors: Mogy
+ * @LastEditTime: 2022-02-22 15:00:32
+ */
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
@@ -7,6 +14,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
+import '@/styles/font/iconfont.css' // global css
 
 import App from './App'
 import store from './store'
@@ -14,6 +22,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import moment from "moment"
 
 /**
  * If you don't want to use mock-server
@@ -24,20 +33,25 @@ import '@/permission' // permission control
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
+    const { mockXHR } = require('../mock')
+    mockXHR()
 }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+// Vue.use(ElementUI, { locale, size: "small" })
 // 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+Vue.use(ElementUI, { size: "small" })
 
 Vue.config.productionTip = false
 
+// 时间过滤器
+Vue.filter("TimeFormat", (value) => {
+    return moment(value).format("YYYY-MM-DD HH:mm:ss")
+})
+
 new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    render: h => h(App)
 })
